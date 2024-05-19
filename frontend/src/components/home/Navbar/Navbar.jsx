@@ -1,7 +1,7 @@
 import React from "react";
 
-import SignIn from "../User/Sign In/SignIn";
-import SignUp from "../User/Sign Up/SignUp";
+import SignUp from "../User/Sign-Up/SignUp";
+import SignIn from "../User/Sign-In/SignIn";
 
 const Navbar = () => {
   return (
