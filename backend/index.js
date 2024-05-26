@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from "cors";
 import mongoose from "mongoose";
+import userRoutes from './routes/user.js'
 
 dotenv.config();
 
@@ -12,6 +13,9 @@ app.use(express.json());
 
 // Middleware to handle cors policy
 app.use(cors());
+
+// Routes
+app.use('/api/user',userRoutes)
 
 // database connection
 mongoose
