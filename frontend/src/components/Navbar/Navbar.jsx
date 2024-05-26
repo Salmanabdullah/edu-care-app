@@ -1,7 +1,5 @@
 import React from "react";
-
-import SignUp from "../User/Sign-Up/SignUp";
-import SignIn from "../User/Sign-In/SignIn";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -43,14 +41,20 @@ const Navbar = () => {
       <div className="navbar-center"></div>
       <div className="navbar-end flex space-x-4">
         <div>
-          <button>
-            <SignIn />
-          </button>
+          <Link
+            to={`api/user/login`}
+            className="border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
+          >
+            Login
+          </Link>
         </div>
         <div>
-          <button>
-            <SignUp />
-          </button>
+          <Link
+            to={`api/user/signup`}
+            className="border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
+          >
+            SignUp
+          </Link>
         </div>
       </div>
     </div>
