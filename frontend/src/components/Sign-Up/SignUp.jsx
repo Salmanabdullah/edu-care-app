@@ -10,31 +10,32 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   // To save Sign Up
-  const handleSignUp = () => {
-    const data = {
+  const handleSignUp = async () => {
+    const newUser = {
       email,
       password,
     };
-    setLoading(true);
-    axios
-      .post("http://localhost:5000/api/user", data)
-      .then(() => {
-        setLoading(false);
-        navigate("/");
+    try {
+      setLoading(true);
+      const response = await axios.post(`http://localhost:5000/api/user/signup`, newUser)
+      setLoading(false);
+      navigate("/");
+      console.log(response.data);
+    } catch (error) {
+      setLoading(false);
+        console.log(error);
+    }
+     
         // TODO: show success message and redirect to login page
         // TODO: Log out
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(err);
-      });
+      
   };
   return (
     <div className="flex justify-center items-center pt-8">
       {loading ? <Spinner /> : ""}
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
-          <h1 className="my-3 text-4xl font-bold">Signup</h1>
+          <h1 className="my-3 text-4xl font-bold">Sign up</h1>
           <p className="text-sm text-gray-400">Create a new account</p>
         </div>
         <form
