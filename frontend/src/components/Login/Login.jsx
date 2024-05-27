@@ -17,7 +17,7 @@ const SignUp = () => {
     };
     setLoading(true);
     axios
-      .post("http://localhost:5000/api/user", data)
+      .post("http://localhost:5000/api/user/login", data)
       .then(() => {
         setLoading(false);
         navigate("/");
