@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../Spinner"
+import Spinner from "../Spinner";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -10,31 +10,32 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   // To save Sign Up
-  const handleSignUp = () => {
-    const data = {
+  const handleSignUp =  () => {
+    const newUser = {
       email,
       password,
     };
     setLoading(true);
     axios
-      .post("http://localhost:5000/api/user", data)
+      .post("http://localhost:5000/api/user/signup", newUser)
       .then(() => {
         setLoading(false);
         navigate("/");
-        // TODO: show success message and redirect to login page
-        // TODO: Log out
       })
       .catch((err) => {
         setLoading(false);
         console.log(err);
       });
+
+    // TODO: show success message and redirect to login page
+    // TODO: Log out
   };
   return (
     <div className="flex justify-center items-center pt-8">
       {loading ? <Spinner /> : ""}
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
-          <h1 className="my-3 text-4xl font-bold">Signup</h1>
+          <h1 className="my-3 text-4xl font-bold">Sign up</h1>
           <p className="text-sm text-gray-400">Create a new account</p>
         </div>
         <form
@@ -81,7 +82,7 @@ const SignUp = () => {
             <div>
               <button
                 type="submit"
-                onClick={handleSignUp}
+                onClick={()=>{handleSignUp}}
                 className="w-full px-8 py-3 font-semibold rounded-md hover:bg-gray-700 hover:text-white text-gray-100 bg-red-300"
               >
                 Sign up
@@ -99,9 +100,6 @@ const SignUp = () => {
       </div>
     </div>
   );
-
-  
 };
-
 
 export default SignUp;
