@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../Spinner"
+import Spinner from "../Spinner";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -10,25 +10,25 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   // To save Sign Up
-  const handleSignUp = async () => {
+  const handleSignUp =  () => {
     const newUser = {
       email,
       password,
     };
-    try {
-      setLoading(true);
-      const response = await axios.post(`http://localhost:5000/api/user/signup`, newUser)
-      setLoading(false);
-      navigate("/");
-      console.log(response.data);
-    } catch (error) {
-      setLoading(false);
-        console.log(error);
-    }
-     
-        // TODO: show success message and redirect to login page
-        // TODO: Log out
-      
+    setLoading(true);
+    axios
+      .post("http://localhost:5000/api/user/signup", newUser)
+      .then(() => {
+        setLoading(false);
+        navigate("/");
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
+
+    // TODO: show success message and redirect to login page
+    // TODO: Log out
   };
   return (
     <div className="flex justify-center items-center pt-8">
@@ -82,7 +82,7 @@ const SignUp = () => {
             <div>
               <button
                 type="submit"
-                onClick={handleSignUp}
+                onClick={()=>{handleSignUp}}
                 className="w-full px-8 py-3 font-semibold rounded-md hover:bg-gray-700 hover:text-white text-gray-100 bg-red-300"
               >
                 Sign up
@@ -100,9 +100,6 @@ const SignUp = () => {
       </div>
     </div>
   );
-
-  
 };
-
 
 export default SignUp;

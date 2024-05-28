@@ -1,21 +1,18 @@
 import { User } from "../models/userModel.js";
-
+import { createToken } from "../JsonWebToken/jwt.js";
 //signup user
 const signupUser = async (req, res) => {
-  try {
-    if (!req.body.email || !req.body.password) {
-      return res.status(400).send({ message: "Send all required fields" });
-    }
-    const newUser = {
-      email: req.body.email,
-      password: req.body.password,
-    };
+  const {email, password} = req.body
 
-    const user = await User.create(newUser);
-    return res.status(201).send(user);
+  try {
+    const user = await User.signup(email, password)
+
+    //Token
+    const token = createToken(user._id)
+
+    res.status(200).json({email, token})
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(400).json({error: error.message})
   }
 };
 
