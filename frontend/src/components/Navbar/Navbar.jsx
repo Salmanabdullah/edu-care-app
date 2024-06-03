@@ -42,7 +42,7 @@ const Navbar = () => {
       <div className="navbar-end flex space-x-4">
         <div>
           <Link
-            to={`api/user/login`}
+            to="/login"
             className="border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
           >
             Login
@@ -50,7 +50,7 @@ const Navbar = () => {
         </div>
         <div>
           <Link
-            to={`api/user/signup`}
+            to="/signup"
             className="border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
           >
             SignUp
