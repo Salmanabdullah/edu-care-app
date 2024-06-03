@@ -1,7 +1,14 @@
 
 import { Link } from "react-router-dom";
+import { useLogout } from "../../hooks/useLogout";
 
 const Navbar = () => {
+  const {logout} = useLogout();
+
+  const handleClick = () => {
+    logout();
+  }
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -41,9 +48,12 @@ const Navbar = () => {
       <div className="navbar-center"></div>
       <div className="navbar-end flex space-x-4">
         <div>
+          <button onClick={handleClick} className="text-white border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500">Log out</button>
+        </div>
+        <div>
           <Link
             to="/login"
-            className="border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
+            className="text-white border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
           >
             Login
           </Link>
@@ -51,7 +61,7 @@ const Navbar = () => {
         <div>
           <Link
             to="/signup"
-            className="border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
+            className="text-white border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
           >
             SignUp
           </Link>
