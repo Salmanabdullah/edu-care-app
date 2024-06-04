@@ -1,8 +1,10 @@
-import React from 'react'
+import MapComponent from "../MapComponent"
 
 const ContentPanel = () => {
   return (
-    <div className='h-96 bg-indigo-300'>ContentPanel</div>
+    <div className='border-4 bg-gray-300 '>
+      <MapComponent/>
+    </div>
   )
 }
 
