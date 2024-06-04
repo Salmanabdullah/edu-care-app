@@ -1,11 +1,13 @@
-import MapComponent from "../MapComponent"
+import MapComponent from "../MapComponent";
 
 const ContentPanel = () => {
   return (
-    <div className='border-4 bg-gray-300 '>
-      <MapComponent/>
-    </div>
-  )
-}
+    <>
+      <div className="border-4 bg-gray-300 ">
+        <MapComponent />
+      </div>
+    </>
+  );
+};
 
-export default ContentPanel
+export default ContentPanel;
