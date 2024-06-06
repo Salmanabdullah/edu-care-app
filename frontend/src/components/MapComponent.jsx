@@ -1,15 +1,50 @@
 import "leaflet/dist/leaflet.css";
-import React, { useContext } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import React, { useContext,useState, useEffect } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMap, Circle } from "react-leaflet";
 import { MapContext } from "../context/mapContext";
+
 
 
 // import 'leaflet-defaulticon-compatibility';
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 
 const MapComponent = () => {
-  const position = [50.8359, 12.9233]; // Default position for the map
   const { data } = useContext(MapContext);
+
+
+  // Component to handle geolocation
+  const LocationMarker = () => {
+    const [position, setPosition] = useState(null);
+    const [accuracy, setAccuracy] = useState(null);
+    const map = useMap();
+
+    useEffect(() => {
+      map.locate({ setView: true, maxZoom: 16, enableHighAccuracy: true });
+
+      const onLocationFound = (e) => {
+        setPosition(e.latlng);
+        setAccuracy(e.accuracy / 10);
+      };
+
+      map.on('locationfound', onLocationFound);
+
+      return () => {
+        map.off('locationfound', onLocationFound);
+      };
+    }, [map]);
+
+    return position === null ? null : (
+      <>
+        <Marker position={position}>
+          <Popup>
+            You are within {accuracy} meters from this point
+          </Popup>
+        </Marker>
+        <Circle center={position} radius={accuracy} />
+      </>
+    );
+  };
+
 
   return (
     <>
@@ -18,7 +53,7 @@ const MapComponent = () => {
         <div className="">
           { (
             <MapContainer
-              center={position}
+              center={[50.8359, 12.9233]}
               zoom={11}
               style={{ height: "100vh", width: "100%" }}
             >
@@ -52,6 +87,7 @@ const MapComponent = () => {
                   </Popup>
                 </Marker>
               ))}
+              <LocationMarker />
             </MapContainer>
           )}
         </div>
