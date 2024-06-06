@@ -11,7 +11,6 @@ const app = express();
 
 // Middleware to parse request body
 app.use(express.json());
-
 app.use(cors());
 
 // Routes

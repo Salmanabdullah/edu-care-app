@@ -10,13 +10,13 @@ import {
 const router = express.Router();
 
 // require auth for all map routes
-router.use(requireAuth);
+//router.use(requireAuth);
 
 // location routes will be placed here
 
-router.get("/schools", getSchool);
-router.get("/kindergartens", getKindergarten);
-router.get("/schulsozialarbeit", getChild);
-router.get("/jugendberufshilfen", getTeenager);
+router.get("/school", getSchool);
+router.get("/kindergarten", getKindergarten);
+router.get("/child", getChild);
+router.get("/teenager", getTeenager);
 
 export default router;

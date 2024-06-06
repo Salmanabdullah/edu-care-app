@@ -1,28 +1,33 @@
-import React from "react";
+import React,{useContext} from "react";
+//import MapComponent from "../MapComponent";
+import {useNavigate} from "react-router-dom"
+import { MapContext } from "../../context/mapContext";
 
 const CategoriesPanel = () => {
-  const handleClick = async (e) => {
-    e.preventDefault();
+  const navigate = useNavigate()
+  const { fetchData } = useContext(MapContext);
 
-    //await login(req,res);
+  const handleClick = (category) => {
+    fetchData(category)
+    navigate("/map")
     
-    
-    console.log(e.target.innerText);
   };
+
+
   return (
     <div className="">
       <ul className="flex space-x-10 justify-center text-xl p-4 f">
-        <li>
-          <button onClick={handleClick}>School</button>
+      <li>
+          <button onClick={() => handleClick('school')}>School</button>
         </li>
         <li>
-          <button onClick={handleClick}>Kindergarten </button>
+          <button onClick={() => handleClick('kindergarten')}>Kindergarten</button>
         </li>
         <li>
-          <button onClick={handleClick}>Child</button>
+          <button onClick={() => handleClick('child')}>Child</button>
         </li>
         <li>
-          <button onClick={handleClick}>Teenager</button>
+          <button onClick={() => handleClick('teenager')}>Teenager</button>
         </li>
       </ul>
     </div>
