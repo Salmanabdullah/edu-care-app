@@ -3,22 +3,20 @@ import React, { useContext } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { MapContext } from "../context/mapContext";
 
-// import L from 'leaflet';
 
-// Fix for default icon issues with webpack and react-leaflet
 // import 'leaflet-defaulticon-compatibility';
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 
 const MapComponent = () => {
   const position = [50.8359, 12.9233]; // Default position for the map
-  const { data, mapVisible } = useContext(MapContext);
+  const { data } = useContext(MapContext);
 
   return (
     <>
       <div className="">
         <div className=""></div>
         <div className="">
-          {mapVisible && (
+          { (
             <MapContainer
               center={position}
               zoom={11}
