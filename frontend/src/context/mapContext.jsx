@@ -4,7 +4,7 @@ const MapContext = createContext();
 
 const MapProvider = ({ children }) => {
   const [data, setData] = useState([]);
-  const [mapVisible, setMapVisible] = useState(false);
+  //const [mapVisible, setMapVisible] = useState(false);
 
   const fetchData = async (endpoint) => {
     try {
@@ -17,14 +17,14 @@ const MapProvider = ({ children }) => {
      
 
       setData(plots);
-      setMapVisible(true);
+      //setMapVisible(true);
     } catch (error) {
       console.error("Error fetching requested data", error);
     }
   };
 
   return (
-    <MapContext.Provider value={{ data, mapVisible, fetchData }}>
+    <MapContext.Provider value={{ data, fetchData }}>
       {children}
     </MapContext.Provider>
   );

@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
-import {useNavigate} from "react-router-dom"
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, error, isLoading } = useLogin();
-  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     await login(email, password);
-    navigate("/")
   };
 
   return (
@@ -47,14 +45,6 @@ const Login = () => {
                 <label className="block text-xl leading-6 text-gray-100">
                   Password
                 </label>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="text-lg text-indigo-100 hover:text-green-600"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -66,6 +56,14 @@ const Login = () => {
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+              </div>
+              <div className="text-sm float-right">
+                <a
+                  href="#"
+                  className="text-lg text-indigo-100 hover:text-green-600"
+                >
+                  Forgot password?
+                </a>
               </div>
             </div>
 

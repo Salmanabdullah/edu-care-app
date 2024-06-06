@@ -9,14 +9,14 @@ const CategoriesPanel = () => {
 
   const handleClick = (category) => {
     fetchData(category)
-    navigate("/map")
+    navigate("/")
     
   };
 
 
   return (
     <div className="">
-      <ul className="flex space-x-10 justify-center text-xl p-4 f">
+      <ul className="flex space-x-10 justify-center text-xl p-4">
       <li>
           <button onClick={() => handleClick('school')}>School</button>
         </li>
