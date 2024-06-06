@@ -1,8 +1,9 @@
-import express from 'express';
-import dotenv from 'dotenv';
 import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
 import mongoose from "mongoose";
-import userRoutes from './routes/user.js'
+import mapRoutes from "./routes/mapRoute.js";
+import userRoutes from "./routes/user.js";
 
 dotenv.config();
 
@@ -10,12 +11,11 @@ const app = express();
 
 // Middleware to parse request body
 app.use(express.json());
-
-// Middleware to handle cors policy
 app.use(cors());
 
 // Routes
-app.use('/api/user',userRoutes)
+app.use("/api/user", userRoutes);
+app.use("/api", mapRoutes);
 
 // database connection
 mongoose

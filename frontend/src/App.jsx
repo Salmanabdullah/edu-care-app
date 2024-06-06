@@ -4,11 +4,15 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
+
+
+
 const App = () => {
   return (
     <div>
       <BrowserRouter>
         <Header />
+        
         <div>
           <Routes>
             <Route path="/" element={<Home />} />

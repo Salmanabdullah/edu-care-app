@@ -1,13 +1,13 @@
-import React from 'react'
+
 import Navbar from '../Navbar/Navbar'
-
-
+import CategoriesPanel from '../Categories/CategoriesPanel'
 
 
 const Header = () => {
   return (
-    <div className='border-4 bg-gray-100'>
+    <div className='border-4 '>
       <Navbar />
+      <CategoriesPanel />
       <div>
         
       </div>
