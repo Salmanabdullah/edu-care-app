@@ -1,6 +1,8 @@
 import "leaflet/dist/leaflet.css";
-import React from "react";
+import React, { useContext } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContext } from "../context/mapContext";
+
 // import L from 'leaflet';
 
 // Fix for default icon issues with webpack and react-leaflet
@@ -9,29 +11,51 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 
 const MapComponent = () => {
   const position = [50.8359, 12.9233]; // Default position for the map
-  
+  const { data, mapVisible } = useContext(MapContext);
+
   return (
     <>
-      <div className="flex">
-        <div className="flex-none w-96">
-          
-        </div>
-        <div className="flex-1">
-          <MapContainer
-            center={position}
-            zoom={15}
-            style={{ height: '100vh', width: '100%' }}
-          >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-            <Marker position={position}>
-              <Popup>
-                Karl Marx <br /> Monument.
-              </Popup>
-            </Marker>
-          </MapContainer>
+      <div className="">
+        <div className=""></div>
+        <div className="">
+          {mapVisible && (
+            <MapContainer
+              center={position}
+              zoom={11}
+              style={{ height: "100vh", width: "100%" }}
+            >
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              />
+              {data.map((data, index) => (
+                <Marker
+                  key={index}
+                  position={[
+                    data.geometry.coordinates[1],
+                    data.geometry.coordinates[0],
+                  ]}
+                >
+                  <Popup>
+                    <table className="">
+                      <tbody>
+                        {Object.entries(data.properties).map(
+                          ([key, value], idx) => (
+                            <tr key={idx}>
+                              <td>
+                                <strong>{key}:</strong>
+                              </td>
+                              <td>{value}</td>
+                            </tr>
+                          )
+                        )}
+                      </tbody>
+                    </table>
+                  </Popup>
+                </Marker>
+              ))}
+            </MapContainer>
+          )}
         </div>
       </div>
     </>
