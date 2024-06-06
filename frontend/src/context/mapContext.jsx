@@ -4,7 +4,6 @@ const MapContext = createContext();
 
 const MapProvider = ({ children }) => {
   const [data, setData] = useState([]);
-  //const [mapVisible, setMapVisible] = useState(false);
 
   const fetchData = async (endpoint) => {
     try {
