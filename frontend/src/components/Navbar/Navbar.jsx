@@ -49,7 +49,15 @@ const Navbar = () => {
       <div className="navbar-center"></div>
       <div className="navbar-end flex space-x-4">
         {user && (
-          <div>
+          <div className="flex space-x-4">
+            <button>
+            <Link
+                to="/profile"
+                className="text-white border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
+              >
+                Profile
+              </Link>
+            </button>
             <button
               onClick={handleClick}
               className="text-white border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
