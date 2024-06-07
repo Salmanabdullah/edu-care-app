@@ -46,12 +46,16 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-      <div className="navbar-center"></div>
+      <div className="navbar-center text-5xl">
+        <Link to='/'>
+        Edu Care
+        </Link>
+        </div>
       <div className="navbar-end flex space-x-4">
         {user && (
           <div className="flex space-x-4">
             <button>
-            <Link
+              <Link
                 to="/profile"
                 className="text-white border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
               >

@@ -23,6 +23,14 @@ const Profile = () => {
         <div className="card w-96 bg-gray-500 shadow-xl">
           <button className="p-40">
             <div className="card-body items-center text-center text-3xl font-black">
+             Change Address
+            </div>
+          </button>
+        </div>
+
+        <div className="card w-96 bg-gray-500 shadow-xl">
+          <button className="p-40">
+            <div className="card-body items-center text-center text-3xl font-black">
              Delete Account
             </div>
           </button>
