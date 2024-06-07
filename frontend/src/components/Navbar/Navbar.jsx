@@ -48,7 +48,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-center text-5xl">
         <Link to='/'>
-        Edu Care
+        Edu Care Chemnitz
         </Link>
         </div>
       <div className="navbar-end flex space-x-4">
