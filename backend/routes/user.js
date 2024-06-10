@@ -1,6 +1,9 @@
 import express from "express";
 import loginUser from "../controllers/loginController.js"
 import signupUser from "../controllers/signupController.js"
+import updatePassword from "../controllers/updatePassword.js";
+import requireAuth from "../middlewares/requireAuth.js";
+
 
 const router = express.Router();
 
@@ -9,5 +12,8 @@ router.post("/login", loginUser);
 
 // signup route
 router.post("/signup", signupUser);
+
+// update password route (requires authentication)
+router.post("/update-password", requireAuth, updatePassword);
 
 export default router;
