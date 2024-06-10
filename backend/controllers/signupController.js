@@ -2,10 +2,10 @@ import { User } from "../models/userModel.js";
 import { createToken } from "../JsonWebToken/jwt.js";
 //signup user
 const signupUser = async (req, res) => {
-  const {name, email, password} = req.body
+  const {name, email,address, password} = req.body
 
   try {
-    const user = await User.signup(name, email, password)
+    const user = await User.signup(name, email,address, password)
 
     //Token
     const token = createToken(user._id)

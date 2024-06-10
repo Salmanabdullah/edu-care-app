@@ -5,12 +5,13 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
   const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await signup(name, email, password);
+    await signup(name, email, address, password);
   };
 
   return (
@@ -24,7 +25,7 @@ const Signup = () => {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
+            <div>
               <label className="block text-2xl leading-6 text-gray-100">
                 Name
               </label>
@@ -51,6 +52,22 @@ const Signup = () => {
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-2xl leading-6 text-gray-100">
+                Address
+              </label>
+              <div className="mt-2">
+                <input
+                  id="address"
+                  type="text"
+                  onChange={(e) => setAddress(e.target.value)}
+                  value={address}
                   required
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />

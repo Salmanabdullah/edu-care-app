@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema(
       lowercase: true,
       match: /^\S+@\S+\.\S+$/,
     },
+    address: {
+      type: String,
+      required: true
+    },
     password: {
       type: String,
       required: true,
@@ -26,10 +30,10 @@ const UserSchema = new mongoose.Schema(
   }
 );
 // static signup method
-UserSchema.statics.signup = async function(name, email, password) {
+UserSchema.statics.signup = async function(name, email,address, password) {
 
   // validation
-  if (!name||!email || !password) {
+  if (!name||!email ||!address || !password) {
     throw Error('All fields must be filled')
   }
   if (!validator.isEmail(email)) {
@@ -48,7 +52,7 @@ UserSchema.statics.signup = async function(name, email, password) {
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
 
-  const user = await this.create({ name, email, password: hash })
+  const user = await this.create({ name, email,address, password: hash })
 
   return user
 }
@@ -72,17 +76,24 @@ UserSchema.statics.login = async function(email, password) {
 
   return user
 }
-// Hash the password before saving it to the database
-// UserSchema.pre("save", async function (next) {
-//   try {
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(this.password, salt);
-//     this.password = hashedPassword;
-//     next();
-//   } catch (error) {
-//     next(error);
-//   }
-// }
+
+// instance method to update password
+UserSchema.methods.updatePassword = async function(oldPassword, newPassword,confirmNewPassword) {
+  const match = await bcrypt.compare(oldPassword, this.password);
+  if (!match) {
+    throw Error('Incorrect old password');
+  }
+  if(newPassword !== confirmNewPassword){
+    throw Error('Passwords do not match');
+  }
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(newPassword, salt);
+
+  this.password = hash;
+  await this.save();
+
+  return this;
+};
 
 
 export const User = mongoose.model("User", UserSchema);
