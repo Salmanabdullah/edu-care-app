@@ -76,17 +76,24 @@ UserSchema.statics.login = async function(email, password) {
 
   return user
 }
-// Hash the password before saving it to the database
-// UserSchema.pre("save", async function (next) {
-//   try {
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(this.password, salt);
-//     this.password = hashedPassword;
-//     next();
-//   } catch (error) {
-//     next(error);
-//   }
-// }
+
+// instance method to update password
+UserSchema.methods.updatePassword = async function(oldPassword, newPassword,confirmNewPassword) {
+  const match = await bcrypt.compare(oldPassword, this.password);
+  if (!match) {
+    throw Error('Incorrect old password');
+  }
+  if(newPassword !== confirmNewPassword){
+    throw Error('Passwords do not match');
+  }
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(newPassword, salt);
+
+  this.password = hash;
+  await this.save();
+
+  return this;
+};
 
 
 export const User = mongoose.model("User", UserSchema);
