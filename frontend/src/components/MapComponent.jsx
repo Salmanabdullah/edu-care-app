@@ -1,16 +1,28 @@
+import L from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
-import { useContext } from "react";
+import { useContext, useEffect, useState, useMemo  } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { MapContext } from "../context/mapContext";
 import MyLocation from "./MyLocation";
-import L from 'leaflet'
 
 const MapComponent = () => {
-  const { data } = useContext(MapContext);
+  const { data, category } = useContext(MapContext);
+  console.log();
+  const colors = useMemo(()=>({
+    Schulen: "#583470",
+    Kindertageseinrichtungen: "#5ba64c",
+    Schulsozialarbeit: "#352da6",
+    Jugendberufshilfen: "#c21d6a",
+  }),[]);
+  const [myCustomColour, setMyCustomColour] = useState(colors["Schulen"]);
 
-  const myCustomColour = '#583470';
-
+  // Update myCustomColour when category changes
+  useEffect(() => {
+    if (category && colors[category]) {
+      setMyCustomColour(colors[category]);
+    }
+  },[category,colors]);
   const markerHtmlStyles = `
     background-color: ${myCustomColour};
     width: 3rem;
@@ -28,7 +40,7 @@ const MapComponent = () => {
     iconAnchor: [0, 24],
     labelAnchor: [-6, 0],
     popupAnchor: [0, -36],
-    html: `<span style="${markerHtmlStyles}" />`
+    html: `<span style="${markerHtmlStyles}" />`,
   });
 
   return (
@@ -47,7 +59,8 @@ const MapComponent = () => {
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               />
               {data.map((data, index) => (
-                <Marker icon={icon}
+                <Marker
+                  icon={icon}
                   key={index}
                   position={[
                     data.geometry.coordinates[1],
