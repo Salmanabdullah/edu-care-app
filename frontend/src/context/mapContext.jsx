@@ -4,6 +4,7 @@ const MapContext = createContext();
 
 const MapProvider = ({ children }) => {
   const [data, setData] = useState([]);
+  const [category, setCatetogy] = useState([]);
 
   const fetchData = async (endpoint) => {
     try {
@@ -11,19 +12,21 @@ const MapProvider = ({ children }) => {
         method: "GET",
       });
       const json = await response.json();
-      console.log(json);
+      const name = json[0].name
       const plots = json[0].features;
-     
-
+      console.log(name);
+      
+      
+      setCatetogy(name)
       setData(plots);
-      //setMapVisible(true);
+
     } catch (error) {
       console.error("Error fetching requested data", error);
     }
   };
 
   return (
-    <MapContext.Provider value={{ data, fetchData }}>
+    <MapContext.Provider value={{ data, category, fetchData }}>
       {children}
     </MapContext.Provider>
   );
