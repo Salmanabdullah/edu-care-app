@@ -47,6 +47,7 @@ const MapComponent = () => {
     html: `<span style="${markerHtmlStyles}" />`,
   });
 
+
   return (
     <>
       <div className="">
@@ -71,7 +72,7 @@ const MapComponent = () => {
                     data.geometry.coordinates[0],
                   ]}
                 >
-                  <Popup>
+                  <Popup className="">
                     <table className="">
                       <tbody>
                         {Object.entries(data.properties).map(
@@ -80,17 +81,17 @@ const MapComponent = () => {
                               <td>
                                 <strong>{key}:</strong>
                               </td>
-                              <td className="font-bold">{value}</td>
+                              <td className="">{value}</td>
                             </tr>
                           )
                         )}
                       </tbody>
                        
                     </table>
-                    <div className="relative inline-block pt-4">
-                      <button className="relative text-3xl float-right">
-                        <FaRegStar />
-                        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 -mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 transition-opacity duration-300 hover:opacity-100">
+                    <div className="flex justify-center">
+                      <button className=" text-4xl pt-8 group">
+                        <FaRegStar className=""/>
+                        <span className="absolute bottom-3 left-50 transform -translate-x-1/2 -translate-y-10 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                           Mark as favorite
                         </span>
                       </button>
