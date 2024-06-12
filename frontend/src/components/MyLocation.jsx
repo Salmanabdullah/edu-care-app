@@ -26,7 +26,7 @@ const MyLocation = () => {
 
   useMapEvents({
     click: (e) => {
-      map.setView(e.latlng, 20, { animate: true });
+      map.setView(e.latlng, 12, { animate: true });
     }
   });
 

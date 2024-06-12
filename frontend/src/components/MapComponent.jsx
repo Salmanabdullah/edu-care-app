@@ -1,7 +1,8 @@
 import L from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
-import { useContext, useEffect, useState, useMemo  } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { FaRegStar } from "react-icons/fa";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { MapContext } from "../context/mapContext";
 import MyLocation from "./MyLocation";
@@ -9,12 +10,15 @@ import MyLocation from "./MyLocation";
 const MapComponent = () => {
   const { data, category } = useContext(MapContext);
   console.log();
-  const colors = useMemo(()=>({
-    Schulen: "#583470",
-    Kindertageseinrichtungen: "#5ba64c",
-    Schulsozialarbeit: "#352da6",
-    Jugendberufshilfen: "#c21d6a",
-  }),[]);
+  const colors = useMemo(
+    () => ({
+      Schulen: "#583470",
+      Kindertageseinrichtungen: "#5ba64c",
+      Schulsozialarbeit: "#352da6",
+      Jugendberufshilfen: "#c21d6a",
+    }),
+    []
+  );
   const [myCustomColour, setMyCustomColour] = useState(colors["Schulen"]);
 
   // Update myCustomColour when category changes
@@ -22,7 +26,7 @@ const MapComponent = () => {
     if (category && colors[category]) {
       setMyCustomColour(colors[category]);
     }
-  },[category,colors]);
+  }, [category, colors]);
   const markerHtmlStyles = `
     background-color: ${myCustomColour};
     width: 3rem;
@@ -76,12 +80,21 @@ const MapComponent = () => {
                               <td>
                                 <strong>{key}:</strong>
                               </td>
-                              <td>{value}</td>
+                              <td className="font-bold">{value}</td>
                             </tr>
                           )
                         )}
                       </tbody>
+                       
                     </table>
+                    <div className="relative inline-block pt-4">
+                      <button className="relative text-3xl float-right">
+                        <FaRegStar />
+                        <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 -mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 transition-opacity duration-300 hover:opacity-100">
+                          Mark as favorite
+                        </span>
+                      </button>
+                    </div>
                   </Popup>
                 </Marker>
               ))}
