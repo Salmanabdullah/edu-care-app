@@ -1,7 +1,7 @@
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
-import { Circle, Marker, Popup, useMap } from "react-leaflet";
+import { Circle, Marker, Popup, useMap, useMapEvents  } from "react-leaflet";
 
 // Component to handle geolocation
 const MyLocation = () => {
@@ -23,6 +23,12 @@ const MyLocation = () => {
       map.off("locationfound", onLocationFound);
     };
   }, [map]);
+
+  useMapEvents({
+    click: (e) => {
+      map.setView(e.latlng, 20, { animate: true });
+    }
+  });
 
   return position === null ? null : (
     <>
