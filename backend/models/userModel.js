@@ -24,6 +24,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    favorites: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'Item', // Assuming 'Item' is the model for your items
+      default: []
+    }
   },
   {
     timestamps: true,

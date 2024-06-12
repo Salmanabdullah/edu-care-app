@@ -6,10 +6,14 @@ import { FaRegStar } from "react-icons/fa";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { MapContext } from "../context/mapContext";
 import MyLocation from "./MyLocation";
+import useFavorite from "../hooks/useFavorite";
+import { useAuthContext } from "../hooks/useAuthContext";
+
 
 const MapComponent = () => {
   const { data, category } = useContext(MapContext);
-  console.log();
+  const {user} = useAuthContext();
+  const { addFavorite } = useFavorite();
   const colors = useMemo(
     () => ({
       Schulen: "#583470",
@@ -47,6 +51,23 @@ const MapComponent = () => {
     html: `<span style="${markerHtmlStyles}" />`,
   });
 
+  const handleFavorite = async (itemId) => {
+    
+    if (!user) {
+      alert("Please sign in to mark this as favorite.");
+      return;
+    }
+
+    try {
+      await addFavorite(itemId);
+      alert("Marked as favorite successfully!");
+    } catch (error) {
+      console.error("Failed to mark as favorite:", error);
+      alert("Failed to mark as favorite. Please try again.");
+    }
+  };
+
+
 
   return (
     <>
@@ -72,8 +93,8 @@ const MapComponent = () => {
                     data.geometry.coordinates[0],
                   ]}
                 >
-                  <Popup className="">
-                    <table className="">
+                  <Popup>
+                    <table>
                       <tbody>
                         {Object.entries(data.properties).map(
                           ([key, value], idx) => (
@@ -81,7 +102,7 @@ const MapComponent = () => {
                               <td>
                                 <strong>{key}:</strong>
                               </td>
-                              <td className="">{value}</td>
+                              <td>{value}</td>
                             </tr>
                           )
                         )}
@@ -89,7 +110,7 @@ const MapComponent = () => {
                        
                     </table>
                     <div className="flex justify-center">
-                      <button className=" text-4xl pt-8 group">
+                      <button className=" text-4xl pt-8 group" onClick={()=>handleFavorite(data._id)}>
                         <FaRegStar className=""/>
                         <span className="absolute bottom-3 left-50 transform -translate-x-1/2 -translate-y-10 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                           Mark as favorite
