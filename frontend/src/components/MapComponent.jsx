@@ -1,7 +1,8 @@
 import L from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
-import { useContext, useEffect, useState, useMemo  } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { FaRegStar } from "react-icons/fa";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { MapContext } from "../context/mapContext";
 import MyLocation from "./MyLocation";
@@ -9,12 +10,15 @@ import MyLocation from "./MyLocation";
 const MapComponent = () => {
   const { data, category } = useContext(MapContext);
   console.log();
-  const colors = useMemo(()=>({
-    Schulen: "#583470",
-    Kindertageseinrichtungen: "#5ba64c",
-    Schulsozialarbeit: "#352da6",
-    Jugendberufshilfen: "#c21d6a",
-  }),[]);
+  const colors = useMemo(
+    () => ({
+      Schulen: "#583470",
+      Kindertageseinrichtungen: "#5ba64c",
+      Schulsozialarbeit: "#352da6",
+      Jugendberufshilfen: "#c21d6a",
+    }),
+    []
+  );
   const [myCustomColour, setMyCustomColour] = useState(colors["Schulen"]);
 
   // Update myCustomColour when category changes
@@ -22,7 +26,7 @@ const MapComponent = () => {
     if (category && colors[category]) {
       setMyCustomColour(colors[category]);
     }
-  },[category,colors]);
+  }, [category, colors]);
   const markerHtmlStyles = `
     background-color: ${myCustomColour};
     width: 3rem;
@@ -42,6 +46,7 @@ const MapComponent = () => {
     popupAnchor: [0, -36],
     html: `<span style="${markerHtmlStyles}" />`,
   });
+
 
   return (
     <>
@@ -67,7 +72,7 @@ const MapComponent = () => {
                     data.geometry.coordinates[0],
                   ]}
                 >
-                  <Popup>
+                  <Popup className="">
                     <table className="">
                       <tbody>
                         {Object.entries(data.properties).map(
@@ -76,12 +81,21 @@ const MapComponent = () => {
                               <td>
                                 <strong>{key}:</strong>
                               </td>
-                              <td>{value}</td>
+                              <td className="">{value}</td>
                             </tr>
                           )
                         )}
                       </tbody>
+                       
                     </table>
+                    <div className="flex justify-center">
+                      <button className=" text-4xl pt-8 group">
+                        <FaRegStar className=""/>
+                        <span className="absolute bottom-3 left-50 transform -translate-x-1/2 -translate-y-10 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                          Mark as favorite
+                        </span>
+                      </button>
+                    </div>
                   </Popup>
                 </Marker>
               ))}
