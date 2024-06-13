@@ -13,38 +13,6 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a>Homepage</a>
-            </li>
-            <li>
-              <a>Portfolio</a>
-            </li>
-            <li>
-              <a>About</a>
-            </li>
-          </ul>
-        </div>
       </div>
       <div className="navbar-center text-5xl">
         <Link to='/'>
@@ -57,14 +25,14 @@ const Navbar = () => {
             <button>
               <Link
                 to="/profile"
-                className="text-white border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
+                className="text-white text-lg border-2 bg-gray-500 px-4 py-1 rounded-lg hover:bg-sky-900"
               >
                 Profile
               </Link>
             </button>
             <button
               onClick={handleClick}
-              className="text-white border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
+              className="text-white text-lg border-2 bg-gray-500 px-4 py-1 rounded-lg hover:bg-sky-900"
             >
               Log out
             </button>
@@ -75,7 +43,7 @@ const Navbar = () => {
             <div>
               <Link
                 to="/login"
-                className="text-white border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
+                className="text-white text-lg border-2 bg-gray-500 px-4 py-1 rounded-lg hover:bg-sky-900"
               >
                 Login
               </Link>
@@ -83,9 +51,9 @@ const Navbar = () => {
             <div>
               <Link
                 to="/signup"
-                className="text-white border-2 bg-sky-300 px-4 py-1 rounded-lg hover:bg-sky-500"
+                className="text-white text-lg border-2 bg-gray-500 px-4 py-1 rounded-lg hover:bg-sky-900"
               >
-                SignUp
+                Signup
               </Link>
             </div>
           </>
