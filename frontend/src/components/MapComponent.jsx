@@ -2,28 +2,28 @@ import L from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
 import { useContext, useEffect, useMemo, useState } from "react";
-import { FaRegStar } from "react-icons/fa";
+import { FaRegStar, FaStar } from "react-icons/fa";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { MapContext } from "../context/mapContext";
-import MyLocation from "./MyLocation";
-import useFavorite from "../hooks/useFavorite";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import useFavorite from "../hooks/useFavorite";
+import MyLocation from "./MyLocation";
 
 const MapComponent = () => {
   const { data, category } = useContext(MapContext);
-  const {user} = useAuthContext();
-  const { addFavorite } = useFavorite();
+  const { user } = useAuthContext();
+  const { addFavorite, removeFavorite } = useFavorite();
   const colors = useMemo(
     () => ({
       Schulen: "#583470",
-      Kindertageseinrichtungen: "#5ba64c",
+      Kindertageseinrichtungen: "#c21d6a",
       Schulsozialarbeit: "#352da6",
-      Jugendberufshilfen: "#c21d6a",
+      Jugendberufshilfen: "#b0423c",
     }),
     []
   );
   const [myCustomColour, setMyCustomColour] = useState(colors["Schulen"]);
+  const [favorites, setFavorites] = useState([]);
 
   // Update myCustomColour when category changes
   useEffect(() => {
@@ -39,7 +39,7 @@ const MapComponent = () => {
     left: -1.5rem;
     top: -1.5rem;
     position: relative;
-    border-radius: 3rem 3rem 0;
+    border-radius: 2rem 3rem 0 3rem;
     transform: rotate(45deg);
     border: 1px solid #FFFFFF`;
 
@@ -52,7 +52,6 @@ const MapComponent = () => {
   });
 
   const handleFavorite = async (itemId) => {
-    
     if (!user) {
       alert("Please sign in to mark this as favorite.");
       return;
@@ -60,6 +59,7 @@ const MapComponent = () => {
 
     try {
       await addFavorite(itemId);
+      setFavorites([...favorites, itemId]);
       alert("Marked as favorite successfully!");
     } catch (error) {
       console.error("Failed to mark as favorite:", error);
@@ -67,13 +67,29 @@ const MapComponent = () => {
     }
   };
 
+  const handleRemoveFavorite = async (itemId) => {
+    if (!user) {
+      alert("Please sign in to remove this favorite.");
+      return;
+    }
 
+    try {
+      await removeFavorite(itemId);
+      setFavorites(favorites.filter((id) => id !== itemId));
+      alert("Removed from favorites");
+    } catch (error) {
+      console.error("Failed to remove favorite:", error.message);
+    }
+  };
+
+  const isFavorite = (itemId) => {
+    return favorites.includes(itemId);
+  };
 
   return (
     <>
-      <div className="">
-        <div className=""></div>
-        <div className="">
+      <div>
+        <div>
           {
             <MapContainer
               center={[50.8359, 12.9233]}
@@ -107,13 +123,25 @@ const MapComponent = () => {
                           )
                         )}
                       </tbody>
-                       
                     </table>
                     <div className="flex justify-center">
-                      <button className=" text-4xl pt-8 group" onClick={()=>handleFavorite(data._id)}>
-                        <FaRegStar className=""/>
+                      <button
+                        className=" text-4xl pt-8 group"
+                        onClick={() =>
+                          isFavorite(data._id)
+                            ? handleRemoveFavorite(data._id)
+                            : handleFavorite(data._id)
+                        }
+                      >
+                        {isFavorite(data._id) ? (
+                          <FaStar />
+                        ) : (
+                          <FaRegStar />
+                        )}
                         <span className="absolute bottom-3 left-50 transform -translate-x-1/2 -translate-y-10 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                          Mark as favorite
+                          {isFavorite(data._id)
+                            ? "Unmark favorite"
+                            : "Mark as favorite"}
                         </span>
                       </button>
                     </div>

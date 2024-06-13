@@ -1,8 +1,8 @@
 import { User } from "../models/userModel.js";
 
-const addFavorite = async (req, res) => {
+const removeFavorite = async (req, res) => {
   const userId = req.user._id;
-  const { itemId } = req.body;
+  const { itemId } = req.params;
   
   if (!itemId) {
     return res.status(400).json({ error: 'Item ID is required' });
@@ -14,17 +14,15 @@ const addFavorite = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    if (!user.favorites.includes(itemId)) {
-      user.favorites.push(itemId);
-    }
-    
+    user.favorites = user.favorites.filter(fav => fav.toString() !== itemId);
+
     await user.save();
 
-    res.status(200).json({ message: "Favorite added successfully" });
+    res.status(200).json({ message: "Favorite removed successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Failed to add favorite" });
+    res.status(500).json({ error: "Failed to remove favorite" });
   }
 };
 
-export default addFavorite;
+export default removeFavorite;
