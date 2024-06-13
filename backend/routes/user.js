@@ -4,7 +4,7 @@ import signupUser from "../controllers/signupController.js"
 import updatePassword from "../controllers/updatePassword.js";
 import requireAuth from "../middlewares/requireAuth.js";
 import addFavorite from "../controllers/addFavorite.js";
-
+import removeFavorite from "../controllers/removeFavorite.js"
 
 const router = express.Router();
 
@@ -19,5 +19,8 @@ router.post("/update-password", requireAuth, updatePassword);
 
 // add favorite route
 router.post("/favorites", requireAuth, addFavorite);
+
+// Remove favorite route
+router.delete('/favorites/:itemId', requireAuth, removeFavorite);
 
 export default router;
