@@ -6,8 +6,6 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 
 
-
-
 const App = () => {
   return (
     <div>

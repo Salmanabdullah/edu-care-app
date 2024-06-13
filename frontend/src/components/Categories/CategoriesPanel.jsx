@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
-//import MapComponent from "../MapComponent";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { MapContext } from "../../context/mapContext";
-import MyLocation from "../MyLocation";
 
 const CategoriesPanel = () => {
   const navigate = useNavigate();
@@ -16,24 +14,40 @@ const CategoriesPanel = () => {
   return (
     <>
       <div className="flex flex-row">
-        <div className="text-xl p-4 basis-1/4 ">
-          <button onClick={()=>{<MyLocation />}}>Find Me</button>
-        </div>
+        <div className="text-xl p-4 basis-1/4 "></div>
         <div className="basis-1/2">
           <ul className="flex space-x-10 justify-center text-xl p-4">
             <li>
-              <button onClick={() => handleClick("school")}>School</button>
+              <button
+                className="text-white p-2 rounded-md hover:bg-gray-500"
+                onClick={() => handleClick("school")}
+              >
+                School
+              </button>
             </li>
             <li>
-              <button onClick={() => handleClick("kindergarten")}>
+              <button
+                className="text-white p-2 rounded-md hover:bg-gray-500"
+                onClick={() => handleClick("kindergarten")}
+              >
                 Kindergarten
               </button>
             </li>
             <li>
-              <button onClick={() => handleClick("child")}>Child</button>
+              <button
+                className="text-white p-2 rounded-md hover:bg-gray-500"
+                onClick={() => handleClick("child")}
+              >
+                Child
+              </button>
             </li>
             <li>
-              <button onClick={() => handleClick("teenager")}>Teenager</button>
+              <button
+                className="text-white p-2 rounded-md hover:bg-gray-500"
+                onClick={() => handleClick("teenager")}
+              >
+                Teenager
+              </button>
             </li>
           </ul>
         </div>

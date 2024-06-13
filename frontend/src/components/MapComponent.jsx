@@ -9,6 +9,10 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import useFavorite from "../hooks/useFavorite";
 import MyLocation from "./MyLocation";
 
+//toast
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const MapComponent = () => {
   const { data, category } = useContext(MapContext);
   const { user } = useAuthContext();
@@ -51,6 +55,23 @@ const MapComponent = () => {
     html: `<span style="${markerHtmlStyles}" />`,
   });
 
+  const notify = () => {
+    toast.success("Marked as favorite successfully!", {
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+  const notifyRemove = () => {
+    toast.info("Removed from favorites", {
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   const handleFavorite = async (itemId) => {
     if (!user) {
       alert("Please sign in to mark this as favorite.");
@@ -60,7 +81,7 @@ const MapComponent = () => {
     try {
       await addFavorite(itemId);
       setFavorites([...favorites, itemId]);
-      alert("Marked as favorite successfully!");
+      notify();
     } catch (error) {
       console.error("Failed to mark as favorite:", error);
       alert("Failed to mark as favorite. Please try again.");
@@ -76,7 +97,7 @@ const MapComponent = () => {
     try {
       await removeFavorite(itemId);
       setFavorites(favorites.filter((id) => id !== itemId));
-      alert("Removed from favorites");
+      notifyRemove();
     } catch (error) {
       console.error("Failed to remove favorite:", error.message);
     }
@@ -133,11 +154,7 @@ const MapComponent = () => {
                             : handleFavorite(data._id)
                         }
                       >
-                        {isFavorite(data._id) ? (
-                          <FaStar />
-                        ) : (
-                          <FaRegStar />
-                        )}
+                        {isFavorite(data._id) ? <FaStar /> : <FaRegStar />}
                         <span className="absolute bottom-3 left-50 transform -translate-x-1/2 -translate-y-10 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                           {isFavorite(data._id)
                             ? "Unmark favorite"
@@ -149,6 +166,19 @@ const MapComponent = () => {
                 </Marker>
               ))}
               <MyLocation />
+              <ToastContainer
+                position="bottom-right"
+                autoClose={1500}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition:Bounce
+              />
             </MapContainer>
           }
         </div>
