@@ -26,7 +26,6 @@ const UserSchema = new mongoose.Schema(
     },
     favorites: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: 'Item', // Assuming 'Item' is the model for your items
       default: []
     }
   },
