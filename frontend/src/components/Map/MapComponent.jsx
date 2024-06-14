@@ -4,9 +4,9 @@ import "leaflet/dist/leaflet.css";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { MapContext } from "../context/mapContext";
-import { useAuthContext } from "../hooks/useAuthContext";
-import useFavorite from "../hooks/useFavorite";
+import { MapContext } from "../../context/mapContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import useFavorite from "../../hooks/useFavorite";
 import MyLocation from "./MyLocation";
 
 //toast
