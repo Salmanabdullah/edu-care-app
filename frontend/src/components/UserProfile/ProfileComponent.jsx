@@ -34,29 +34,38 @@ const ProfileComponent = () => {
 
   return (
     <div className="bg-gray-500">
-      <div className="bg-gray-800 flex space-x-4 justify-center">
-        <button onClick={() => setActiveForm("changePassword")}>
+      <div className="bg-gray-800 p-4 text-xl flex space-x-8 justify-center">
+        <button onClick={() => setActiveForm("changePassword")} className="text-white text-lg bg-gray-500 px-4 py-1 rounded-lg hover:bg-sky-900">
           Change Password
         </button>
-        <button onClick={() => setActiveForm("changeAddress")}>
+        <button onClick={() => setActiveForm("changeAddress")} className="text-white text-lg bg-gray-500 px-4 py-1 rounded-lg hover:bg-sky-900">
           Change Address
         </button>
-        <button onClick={() => setActiveForm("deleteAccount")}>
+        <button onClick={() => setActiveForm("deleteAccount")} className="text-white text-lg bg-gray-500 px-4 py-1 rounded-lg hover:bg-sky-900">
           Delete Account
         </button>
       </div>
-      <div className="text-center">
+      <div className="text-white">
         {currentUser && (
-          <div>
-            <p>
-              <strong>Name:</strong> {currentUser.name}
-            </p>
-            <p>
-              <strong>Email:</strong> {currentUser.email}
-            </p>
-            <p>
-              <strong>Address:</strong> {currentUser.address}
-            </p>
+          <div className="text-2xl mt-4">
+            <table>
+              <tbody>
+                <tr>
+                  <td className="px-4"><strong>Name </strong></td>
+                  <td>: {currentUser.name}</td>
+                </tr>
+                <tr>
+                  <td className="px-4"><strong>Email </strong></td>
+                  <td>: {currentUser.email}</td>
+                </tr>
+                <tr>
+                  <td className="px-4"><strong>Address</strong></td>
+                  <td>: {currentUser.address}</td>
+                </tr>
+                
+              </tbody>
+            </table>
+        
           </div>
         )}
       </div>
