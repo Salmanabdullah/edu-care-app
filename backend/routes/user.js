@@ -1,10 +1,15 @@
 import express from "express";
-import loginUser from "../controllers/loginController.js"
-import signupUser from "../controllers/signupController.js"
-import updatePassword from "../controllers/updatePassword.js";
-import requireAuth from "../middlewares/requireAuth.js";
 import addFavorite from "../controllers/addFavorite.js";
-import removeFavorite from "../controllers/removeFavorite.js"
+import loginUser from "../controllers/loginController.js";
+import removeFavorite from "../controllers/removeFavorite.js";
+import signupUser from "../controllers/signupController.js";
+import updatePassword from "../controllers/updatePassword.js";
+import {
+  deleteUser,
+  getProfile,
+  updateAddress,
+} from "../controllers/userProfileController.js";
+import requireAuth from "../middlewares/requireAuth.js";
 
 const router = express.Router();
 
@@ -17,10 +22,13 @@ router.post("/signup", signupUser);
 // update password route (requires authentication)
 router.post("/update-password", requireAuth, updatePassword);
 
-// add favorite route
+// favorite routes
 router.post("/favorites", requireAuth, addFavorite);
+router.delete("/favorites/:itemId", requireAuth, removeFavorite);
 
-// Remove favorite route
-router.delete('/favorites/:itemId', requireAuth, removeFavorite);
+//user profile routes
+router.get("/profile", requireAuth, getProfile);
+router.patch("/address", requireAuth, updateAddress);
+router.delete("/", requireAuth, deleteUser);
 
 export default router;

@@ -20,7 +20,7 @@ const MapComponent = () => {
   const colors = useMemo(
     () => ({
       Schulen: "#583470",
-      Kindertageseinrichtungen: "#c21d6a",
+      Kindertageseinrichtungen: "#2a8041",
       Schulsozialarbeit: "#352da6",
       Jugendberufshilfen: "#b0423c",
     }),
