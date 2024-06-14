@@ -39,11 +39,11 @@ const ChangePasswordForm = () => {
   };
 
   return (
-    <div className="profile">
-      <h2>Update Password</h2>
+    <div className="p-4">
+      <h1 className="block text-xl mb-4 leading-6 text-gray-100">Update Password</h1>
       <form onSubmit={handleSubmit} className='space-y-2'>
         <div>
-          <label htmlFor="oldPassword">Old Password:</label>
+          <label htmlFor="oldPassword" className="text-xl leading-6 text-gray-100">Old Password:</label>
           <input
             type="password"
             id="oldPassword"
@@ -51,10 +51,11 @@ const ChangePasswordForm = () => {
             onChange={(e) => setOldPassword(e.target.value)}
             required
             autoComplete="current-password"
+            className='rounded-lg border-0 ml-2 py-1.5 px-2 text-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
           />
         </div>
         <div>
-          <label htmlFor="newPassword">New Password:</label>
+          <label htmlFor="newPassword" className="text-xl leading-6 text-gray-100">New Password:</label>
           <input
             type="password"
             id="newPassword"
@@ -62,11 +63,12 @@ const ChangePasswordForm = () => {
             onChange={(e) => setNewPassword(e.target.value)}
             required
             autoComplete="new-password"
+            className='rounded-lg border-0 ml-2 py-1.5 px-2 text-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
           />
         </div>
 
         <div>
-          <label htmlFor="confirmNewPassword">Confirm New Password:</label>
+          <label htmlFor="confirmNewPassword" className="text-xl leading-6 text-gray-100">Confirm New Password:</label>
           <input
             type="password"
             id="confirmNewPassword"
@@ -74,12 +76,13 @@ const ChangePasswordForm = () => {
             onChange={(e) => setConfirmNewPassword(e.target.value)}
             required
             autoComplete="confirm-new-password"
+            className='rounded-lg border-0 ml-2 py-1.5 px-2 text-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
           />
         </div>
 
         <button type="submit" className="text-white text-lg border-2 bg-gray-500 px-4 py-1 rounded-lg hover:bg-sky-900">Update Password</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className="text-white text-2xl py-4">{message}</p>}
     </div>
   );
 };

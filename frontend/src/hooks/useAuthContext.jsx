@@ -8,5 +8,10 @@ export const useAuthContext = () => {
     throw Error('useAuthContext must be used inside an AuthContextProvider')
   }
 
-  return context
+  const logout = () => {
+    context.dispatch({ type: 'LOGOUT' });
+    localStorage.removeItem('user');
+  };
+
+  return { ...context, logout };
 }

@@ -17,6 +17,8 @@ const MapComponent = () => {
   const { data, category } = useContext(MapContext);
   const { user } = useAuthContext();
   const { addFavorite, removeFavorite } = useFavorite();
+  const [favorites, setFavorites] = useState([]);
+  
   const colors = useMemo(
     () => ({
       Schulen: "#583470",
@@ -26,15 +28,16 @@ const MapComponent = () => {
     }),
     []
   );
+  
   const [myCustomColour, setMyCustomColour] = useState(colors["Schulen"]);
-  const [favorites, setFavorites] = useState([]);
-
   // Update myCustomColour when category changes
   useEffect(() => {
     if (category && colors[category]) {
       setMyCustomColour(colors[category]);
     }
   }, [category, colors]);
+
+
   const markerHtmlStyles = `
     background-color: ${myCustomColour};
     width: 3rem;
@@ -47,12 +50,31 @@ const MapComponent = () => {
     transform: rotate(45deg);
     border: 1px solid #FFFFFF`;
 
-  const icon = L.divIcon({
+  const defaultIcon = L.divIcon({
     className: "my-custom-pin",
     iconAnchor: [0, 24],
     labelAnchor: [-6, 0],
     popupAnchor: [0, -36],
     html: `<span style="${markerHtmlStyles}" />`,
+  });
+
+  // Marker icon for favorite state
+  const favoriteIcon = L.divIcon({
+    className: "my-custom-pin favorite",
+    iconAnchor: [0, 24],
+    labelAnchor: [-6, 0],
+    popupAnchor: [0, -36],
+    html: `<span style="background-color: #FFD700; 
+            width: 3rem; 
+            height: 3rem; 
+            display: block; 
+            left: -1.5rem; 
+            top: -1.5rem; 
+            position: relative; 
+            border-radius: 3rem 3rem 0; 
+            transform: rotate(45deg); 
+            border: 1px solid #FFFFFF;">
+            </span>`,
   });
 
   const notify = () => {
@@ -123,7 +145,7 @@ const MapComponent = () => {
               />
               {data.map((data, index) => (
                 <Marker
-                  icon={icon}
+                  icon={isFavorite(data._id)?favoriteIcon:defaultIcon}
                   key={index}
                   position={[
                     data.geometry.coordinates[1],

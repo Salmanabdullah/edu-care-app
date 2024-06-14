@@ -1,8 +1,10 @@
 import React from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import {useNavigate} from "react-router-dom"
 
 const DeleteAccountForm = () => {
-  const { user } = useAuthContext();
+  const { user,logout } = useAuthContext();
+  const navigate = useNavigate()
 
   const handleDeleteAccount = async () => {
     const confirmation = window.confirm('Are you sure you want to delete your account? This action cannot be undone.');
@@ -24,7 +26,9 @@ const DeleteAccountForm = () => {
       }
 
       alert('Account deleted successfully');
-      // Optionally, you can log the user out after account deletion
+      
+      logout()
+      navigate('/')
     } catch (error) {
       console.error(error);
       alert('Error deleting account');
@@ -32,8 +36,8 @@ const DeleteAccountForm = () => {
   };
 
   return (
-    <div>
-      <button onClick={handleDeleteAccount}>Delete Account</button>
+    <div className="p-4">
+      <button onClick={handleDeleteAccount} className="text-white text-lg border-2 bg-gray-500 px-4 py-1 rounded-lg hover:bg-sky-900">Delete Account</button>
     </div>
   );
 };

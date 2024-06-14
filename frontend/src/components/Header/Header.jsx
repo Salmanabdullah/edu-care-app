@@ -5,7 +5,7 @@ import CategoriesPanel from '../Categories/CategoriesPanel'
 
 const Header = () => {
   return (
-    <div className='border-4 '>
+    <div className='border-b-4 border-gray-500'>
       <Navbar />
       <CategoriesPanel />
       <div>
