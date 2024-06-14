@@ -46,7 +46,7 @@ const ProfileComponent = () => {
         </button>
       </div>
       <div className="text-white">
-        {currentUser && (
+        {currentUser && activeForm === null && (
           <div className="text-2xl mt-4">
             <table>
               <tbody>
