@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useAuthContext } from '../hooks/useAuthContext'
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-const Profile = () => {
+const ChangePasswordForm = () => {
   const { user } = useAuthContext();
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -13,13 +13,18 @@ const Profile = () => {
 
     try {
       const response = await fetch("http://localhost:5000/api/user/update-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-        body: JSON.stringify({ oldPassword, newPassword, confirmNewPassword}),
-      });
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({
+            oldPassword,
+            newPassword,
+            confirmNewPassword,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -36,7 +41,7 @@ const Profile = () => {
   return (
     <div className="profile">
       <h2>Update Password</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='space-y-2'>
         <div>
           <label htmlFor="oldPassword">Old Password:</label>
           <input
@@ -72,11 +77,11 @@ const Profile = () => {
           />
         </div>
 
-        <button type="submit">Update Password</button>
+        <button type="submit" className="text-white text-lg border-2 bg-gray-500 px-4 py-1 rounded-lg hover:bg-sky-900">Update Password</button>
       </form>
       {message && <p>{message}</p>}
     </div>
   );
 };
 
-export default Profile;
+export default ChangePasswordForm;
