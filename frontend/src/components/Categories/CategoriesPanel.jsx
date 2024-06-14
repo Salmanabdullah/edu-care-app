@@ -14,9 +14,9 @@ const CategoriesPanel = () => {
   return (
     <>
       <div className="flex flex-row">
-        <div className="text-xl p-4 basis-1/4 "></div>
+        <div className="text-xl px-4 basis-1/4 "></div>
         <div className="basis-1/2">
-          <ul className="flex space-x-10 justify-center text-xl p-4">
+          <ul className="flex space-x-10 justify-center text-xl px-4 pb-1">
             <li>
               <button
                 className="text-white p-2 rounded-md hover:bg-gray-500"

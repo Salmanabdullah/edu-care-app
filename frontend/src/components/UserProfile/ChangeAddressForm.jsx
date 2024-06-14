@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
+//toast
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const ChangeAddressForm = () => {
   const { user } = useAuthContext();
   const [newAddress, setNewAddress] = useState("");
+
+  const notify = () => {
+    toast.success("Address updated successfully", {
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +34,8 @@ const ChangeAddressForm = () => {
         throw new Error("Failed to update address");
       }
 
-      alert("Address updated successfully");
+      notify();
+      setNewAddress("");
     } catch (error) {
       console.error(error);
       alert("Error updating address");
@@ -49,6 +63,7 @@ const ChangeAddressForm = () => {
           Update Address
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
