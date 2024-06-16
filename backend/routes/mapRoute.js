@@ -1,5 +1,4 @@
 import express from "express";
-import requireAuth from "../middlewares/requireAuth.js";
 import {
   getChild,
   getKindergarten,
@@ -8,9 +7,6 @@ import {
 } from "../controllers/mapController.js";
 
 const router = express.Router();
-
-// require auth for all map routes
-// router.use(requireAuth);
 
 // location routes will be placed here
 

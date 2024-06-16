@@ -13,7 +13,7 @@ const DeleteAccountForm = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/user', {
+      const response = await fetch('http://localhost:5000/api/user/:id', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

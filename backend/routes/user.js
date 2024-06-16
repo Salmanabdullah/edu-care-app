@@ -29,6 +29,6 @@ router.delete("/favorites/:itemId", requireAuth, removeFavorite);
 //user profile routes
 router.get("/profile", requireAuth, getProfile);
 router.patch("/address", requireAuth, updateAddress);
-router.delete("/", requireAuth, deleteUser);
+router.delete("/:id", requireAuth, deleteUser);
 
 export default router;

@@ -13,9 +13,7 @@ const MapProvider = ({ children }) => {
       });
       const json = await response.json();
       const name = json[0].name
-      const plots = json[0].features;
-      console.log(name);
-      
+      const plots = json[0].features;      
       
       setCatetogy(name)
       setData(plots);
