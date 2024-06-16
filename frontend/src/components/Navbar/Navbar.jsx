@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogout } from "../../hooks/useLogout";
+import MapComponent from "../Map/MapComponent";
+
 
 const Navbar = () => {
   const { logout } = useLogout();
@@ -14,7 +16,7 @@ const Navbar = () => {
     <div className="navbar bg-base-100">
       <div className="navbar-start"></div>
       <div className="navbar-center text-4xl">
-        <Link to="/">Edu Care Chemnitz</Link>
+        <Link to="/currentlocation" onClick={<MapComponent />}>Edu Care Chemnitz</Link>
       </div>
       <div className="navbar-end flex space-x-4">
         {user && (

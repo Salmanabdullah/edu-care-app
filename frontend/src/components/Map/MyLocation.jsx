@@ -10,7 +10,7 @@ const MyLocation = () => {
   const map = useMap();
 
   useEffect(() => {
-    map.locate({ setView: true, maxZoom: 16, enableHighAccuracy: true });
+    map.locate({ setView: true, maxZoom: 12, enableHighAccuracy: true });
 
     const onLocationFound = (e) => {
       setPosition(e.latlng);
@@ -33,7 +33,7 @@ const MyLocation = () => {
   return position === null ? null : (
     <>
       <Marker position={position}>
-        <Popup>You are within {accuracy} meters from this point</Popup>
+        <Popup>You are within {accuracy.toFixed(2)} meters from this point</Popup>
       </Marker>
       <Circle center={position} radius={accuracy} />
     </>
