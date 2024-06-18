@@ -16,7 +16,7 @@ const Navbar = () => {
     <div className="navbar bg-base-100">
       <div className="navbar-start"></div>
       <div className="navbar-center text-4xl">
-        <Link to="/currentlocation" onClick={<MapComponent />}>Edu Care Chemnitz</Link>
+        <Link to="/" onClick={<MapComponent />}>Edu Care Chemnitz</Link>
       </div>
       <div className="navbar-end flex space-x-4">
         {user && (
