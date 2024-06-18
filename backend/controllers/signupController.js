@@ -10,9 +10,9 @@ const signupUser = async (req, res) => {
     //Token
     const token = createToken(user._id);
 
-    res.status(200).json({ email, token });
+    res.status(201).json({ email, token });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(409).json({ error: error.message });
   }
 };
 

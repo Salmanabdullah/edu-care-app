@@ -29,7 +29,7 @@ export const getProfile = async (req, res) => {
   
       user.address = address;
       await user.save();
-      res.status(200).json({ message: 'Address updated successfully' });
+      res.status(202).json({ message: 'Address updated successfully' });
     } catch (error) {
       res.status(500).json({ error: 'Failed to update address' });
     }
