@@ -37,6 +37,7 @@ const Signup = () => {
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                   required
+                  autoComplete="username"
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -88,6 +89,7 @@ const Signup = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   required
+                  autoComplete="current-password"
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-white-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -103,14 +105,6 @@ const Signup = () => {
               {error && <div>{error}</div>}
             </div>
           </form>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?
-            <a
-              href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            ></a>
-          </p>
         </div>
       </div>
     </>
