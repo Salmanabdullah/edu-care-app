@@ -18,7 +18,7 @@ const MapComponent = () => {
   const { user } = useAuthContext();
   const { addFavorite, removeFavorite } = useFavorite();
   const [favorites, setFavorites] = useState([]);
-  
+
   const colors = useMemo(
     () => ({
       Schulen: "#583470",
@@ -28,7 +28,7 @@ const MapComponent = () => {
     }),
     []
   );
-  
+
   const [myCustomColour, setMyCustomColour] = useState(colors["Schulen"]);
   // Update myCustomColour when category changes
   useEffect(() => {
@@ -36,7 +36,6 @@ const MapComponent = () => {
       setMyCustomColour(colors[category]);
     }
   }, [category, colors]);
-
 
   const markerHtmlStyles = `
     background-color: ${myCustomColour};
@@ -145,7 +144,7 @@ const MapComponent = () => {
               />
               {data.map((data, index) => (
                 <Marker
-                  icon={isFavorite(data._id)?favoriteIcon:defaultIcon}
+                  icon={isFavorite(data._id) ? favoriteIcon : defaultIcon}
                   key={index}
                   position={[
                     data.geometry.coordinates[1],

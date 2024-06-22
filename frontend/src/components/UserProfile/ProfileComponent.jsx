@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useUser } from "../../context/userContext";
 import ChangeAddressForm from "./ChangeAddressForm";
 import ChangePasswordForm from "./ChangePasswordForm";
 import DeleteAccountForm from "./DeleteAccountForm";
 
 const ProfileComponent = () => {
   const { user } = useAuthContext();
-  const [currentUser, setCurrentUser] = useState(null);
+  const {currentUser, updateCurrentUser} = useUser()
   const [activeForm, setActiveForm] = useState(null);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const ProfileComponent = () => {
         });
 
         const data = await response.json();
-        setCurrentUser(data);
+        updateCurrentUser(data);
       } catch (error) {
         console.error("Failed to fetch user data:", error);
       }
@@ -46,7 +47,7 @@ const ProfileComponent = () => {
         </button>
       </div>
       <div className="text-white">
-        {currentUser && activeForm === null && (
+        {currentUser && (
           <div className="text-2xl mt-4">
             <table>
               <tbody>
@@ -72,7 +73,7 @@ const ProfileComponent = () => {
       <div className="mt-6 flex">
         <div className="flex-auto">
           {activeForm === "changePassword" && <ChangePasswordForm />}
-          {activeForm === "changeAddress" && <ChangeAddressForm />}
+          {activeForm === "changeAddress" && <ChangeAddressForm updateCurrentUser={updateCurrentUser} />}
           {activeForm === "deleteAccount" && <DeleteAccountForm />}
         </div>
       </div>
