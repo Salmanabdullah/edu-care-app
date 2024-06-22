@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useUser } from "../../context/userContext";
 
 //toast
 import { ToastContainer, toast } from "react-toastify";
@@ -7,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const ChangeAddressForm = () => {
   const { user } = useAuthContext();
+  const { currentUser, updateCurrentUser } = useUser();
   const [newAddress, setNewAddress] = useState("");
 
   const notify = () => {
@@ -35,6 +37,7 @@ const ChangeAddressForm = () => {
       }
 
       notify();
+      updateCurrentUser({ ...currentUser, address: newAddress });
       setNewAddress("");
     } catch (error) {
       console.error(error);
@@ -63,7 +66,7 @@ const ChangeAddressForm = () => {
           Update Address
         </button>
       </form>
-      <ToastContainer />
+      <ToastContainer autoClose={1000}/>
     </div>
   );
 };
